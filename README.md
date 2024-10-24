@@ -143,9 +143,6 @@ The smart contract is deployed on the local Ganache blockchain and includes:
 
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
-## ⚖️ License
-
-This project is MIT licensed.
 
 
 
