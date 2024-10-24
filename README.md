@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+Blockchain Todo List
+A decentralized Todo List application built with React.js and Ethereum Smart Contracts. This application allows users to create, manage, and track tasks on the blockchain.
+🚀 Features
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Create new tasks
+Toggle task completion status
+Persistent storage on blockchain
+Real-time updates
+Ethereum wallet integration
+Smart contract interaction
 
-## Available Scripts
+📋 Prerequisites
 
-In the project directory, you can run:
+Node.js (v14+ recommended)
+npm (Node Package Manager)
+Ganache
+Truffle Framework
+MetaMask or another Web3 wallet
+Git
 
-### `npm start`
+🛠 Installation & Setup
+1. Clone the Repository
+bashCopygit clone <repository-url>
+cd blockchain-todo-list
+npm install
+2. Install and Setup Ganache
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Download and install Ganache from https://trufflesuite.com/ganache/
+Launch Ganache and create a new workspace
+Ensure Ganache is running on HTTP://127.0.0.1:7545
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. Deploy Smart Contracts
+Run the following commands in your terminal:
+bashCopy# Compile smart contracts
+truffle compile
 
-### `npm test`
+# Deploy contracts to local blockchain
+truffle migrate
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Enter truffle console
+truffle console
+4. Configure Contract in Console
+In the truffle console, run:
+javascriptCopy// Create contract instance
+todoList = await ToDoList.deployed()
 
-### `npm run build`
+// Get contract address (copy this address)
+todoList.address
+5. Frontend Configuration
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Create/update config.js in your frontend directory
+Add the contract address and ABI:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+javascriptCopyexport const TODO_LIST_ADDRESS = 'YOUR_CONTRACT_ADDRESS'
+export const TODO_LIST_ABI = [...] // Copy ABI from build/contracts/TodoList.json
+6. Start the Application
+bashCopynpm run dev
+🔧 Smart Contract Functions
+The smart contract includes the following main functions:
+Create Task
+solidityCopyfunction createTask(string memory _content) public
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Adds a new task to the blockchain
+Increments the task counter
+Emits TaskCreated event
 
-### `npm run eject`
+Toggle Task
+solidityCopyfunction toggleCompleted(uint _id) public
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Toggles the completion status of a task
+Updates task status by ID
+Emits TaskCompleted event
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Fetch Task
+solidityCopyfunction tasks(uint) public view returns (Task memory)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Returns task details using the task ID
+View function (doesn't modify state)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+📝 Usage
 
-## Learn More
+Connect your Web3 wallet (MetaMask) to the application
+Ensure you're connected to the correct network (Ganache)
+Create new tasks using the input field
+Toggle task completion status by clicking the status button
+All actions will require transaction confirmation through your wallet
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+🔍 Smart Contract Details
+The smart contract is deployed on the local Ganache blockchain and includes:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Task mapping
+Task counter
+Event emission for task creation and completion
+Task struct with ID, content, and completion status
 
-### Code Splitting
+💡 Important Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Ensure Ganache is running before starting the application
+Keep your contract address and ABI updated in config.js
+Each transaction (create/toggle task) requires gas fees
+Always backup your Ganache workspace
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🤝 Contributing
+Contributions, issues, and feature requests are welcome! Feel free to check issues page.
+⚖️ License
+This project is MIT licensed.
